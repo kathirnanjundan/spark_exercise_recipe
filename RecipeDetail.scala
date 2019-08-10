@@ -8,7 +8,7 @@ import org.apache.spark.sql.types.{DateType, IntegerType}
 object RecipeDetail extends App{
 
   val spark = SparkSession.builder().appName("Process Recipe Details").master("local[*]").getOrCreate();
-  val recipeJsonData = spark.read.json("C:\\Users\\KathirNanjundan\\IdeaProjects\\Example\\file\\recipes.json");
+  val recipeJsonData = spark.read.json("recipes.json");
 
   val recipeDetailWithId = recipeJsonData.withColumn("recipe_id",monotonically_increasing_id());
   val totalPrepTimeDF = processTotalTime(recipeDetailWithId,"prepTime","prepHour","prepMinutes","prepTotalMinutes");
